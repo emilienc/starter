@@ -1,16 +1,14 @@
-<div class="row-fluid">
-  <div class="span4 well">
-<%=semantic_form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
-    <%=f.semantic_errors%>
-    
-    <%= f.inputs do %>
-    	<%= f.input :email%>
-    	<%= f.input :password%>
-    <%end%>
-    
-	<%= f.actions do %>
-  		<%= f.action :submit, :as => :button %>  
-	<%end%>
+<%= simple_form_for(resource, :validate => true, :as => resource_name, :url => session_path(resource_name),:html => { :class => 'form-vertical' }) do |f| %>
+ <fieldset>
+ 	<legend>Connexion</legend>
+     <%= f.input :email, hint:"Enter your email address" %>
+     <%= f.input :password, hint:"Enter password" %>
+     <% if devise_mapping.rememberable? -%>
+      <%= f.input :remember_me, as: :boolean, :boolean_style => :inline, :hint => 'Remember me', label: false %>
+     <% end -%>
+     <div class="form-actions">
+      <%= f.button :submit ,'Connexion', :class => 'btn-primary'%>
+    </div>
+</fieldset>
 <%end%>
-</div>
-</div>
+<%= render :partial => "devise/shared/links" %>
