@@ -1,13 +1,13 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "sample app", root_path, id: "logo" %>
+      <%= link_to t('title'), root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Help",    '#' %></li>
           <% if user_signed_in? %>
-            <li><%= link_to('Logout', destroy_user_session_path, :method => :delete)%></li>
+            <li><%= link_to('Logout '+ current_user.profile.name, destroy_user_session_path, :method => :delete)%></li>
           <% else %>
             <li><%= link_to('Login', new_user_session_path)  %></li>
           <% end %>
