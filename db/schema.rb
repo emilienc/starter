@@ -50,6 +50,9 @@ ActiveRecord::Schema.define(:version => 20121209153231) do
     t.string   "name"
     t.integer  "user_id"
     t.string   "image_url"
+    t.integer  "taille"
+    t.date     "birthday"
+    t.string   "gender"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

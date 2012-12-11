@@ -1,0 +1,14 @@
+<%= simple_form_for @profile, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    
+    <legend>Profil de <%=@profile.name%></legend>
+    <%= f.input :taille, hint:"Entrez votre taille" %>
+    <%= f.input :birthday, hint:"Entrez votre taille" %>
+    <%= f.input :gender, hint:"homme ou femme" %>
+
+
+    <div class="form-actions">
+      <%= f.button :submit ,'Update', :class => 'btn-primary'%>
+    </div>
+  </fieldset>
+<% end %>

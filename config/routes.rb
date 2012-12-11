@@ -1,7 +1,13 @@
 Starter::Application.routes.draw do
-  resources :profiles
 
+  
 
+  get "profile/show"
+
+  get "profile/edit"
+
+  resources :profile
+  
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config

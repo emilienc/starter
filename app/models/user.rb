@@ -13,6 +13,18 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,:provider, :uid,:name
   # attr_accessible :title, :body
 
+  def self.set_profile(user,auth)
+    if user.profile.nil?
+      @profile = user.build_profile
+    else
+      @profile = user.profile
+    end
+    @profile.name = auth.extra.raw_info.name
+    @profile.image_url = auth.info.image
+    @profile.save
+
+  end
+
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
   	user = User.where(:provider => auth.provider, :uid => auth.uid).first
   	unless user
@@ -22,10 +34,10 @@ class User < ActiveRecord::Base
                          email:auth.info.email,
                          password:Devise.friendly_token[0,20]
                          )
-      @profile = user.build_profile
-      @profile.name = auth.extra.raw_info.name
-      @profile.save
+      
+      
   	end
+    set_profile(user,auth)
   	user
   end
 
@@ -35,6 +47,10 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def profile
+    super || build_profile
   end
 
 end
